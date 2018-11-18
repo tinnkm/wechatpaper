@@ -1,0 +1,13 @@
+/**index.wxss**/
+.title{
+  display: block;
+  font-size: 50rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx ;
+}
+.button{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
