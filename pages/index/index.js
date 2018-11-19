@@ -11,44 +11,37 @@ Page({
   },
   //提交表单
   submit: function(e) {
-    if(e.detail.value.name.length === 0 || e.detail.value.telphone.length === 0
-      || e.detail.value.idCard.length === 0){
-        wx.showToast({
-          title: '姓名/手机号/身份证不得为空!',
-          icon: 'none',
-          duration: 1500
+    if (e.detail.value.name.length === 0 || e.detail.value.telphone.length === 0 ||
+      e.detail.value.idCard.length === 0) {
+      wx.showToast({
+        title: '姓名/手机号/身份证不得为空!',
+        icon: 'none',
+        duration: 1500
 
-        })
-        setTimeout(function () {
-          wx.hideToast()
-        }, 2000)
-    }else{
+      })
+      setTimeout(function() {
+        wx.hideToast()
+      }, 2000)
+    } else {
       //发生请求到到后台，并获得token
       wx.showLoading({
         title: '加载中',
       })
       wx.request({
-        url: 'http://whyidg.natappfree.cc/api/user/save',
+        url: 'http://rtxizu.natappfree.cc/api/user/save',
         method: 'POST', //仅为示例，并非真实的接口地址
         data: {
           userName: e.detail.value.name,
           phone: e.detail.value.telphone,
           idCard: e.detail.value.idCard,
-          role:'student'
+          role: 'student'
         },
-        header:{
+        header: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
         },
         success(res) {
-          console.log(res.data)
-          wx.setStorage({
-            key: "token",
-            data: res.data.token
-          })
-          wx.setStorage({
-            key: "userId",
-            data: res.data.userId
-          })
+          wx.setStorageSync("token", res.data.data.token)
+          wx.setStorageSync("userId", res.data.data.userId)
           wx.navigateTo({
             url: '../upload/upload'
           })
@@ -92,6 +85,11 @@ Page({
             hasUserInfo: true
           })
         }
+      })
+    }
+    if(wx.getStorageSync('userId')){
+      wx.redirectTo({
+        url: '../upload/upload'
       })
     }
   },

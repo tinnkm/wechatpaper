@@ -1,7 +1,7 @@
 <view class="page">
   <view class="page__hd">
-    <view class="page__title">Article</view>
-    <view class="page__desc">文章</view>
+    <view class="page__title">{{template.templateName}}</view>
+    <view class="page__desc">{{template.templateDesc}}</view>
   </view>
   <view class="page__bd">
     <view class="weui-article">
@@ -37,6 +37,9 @@
           </view>
         </view>
       </block>
+    </view>
+    <view class="button" style='width:60%;margin:auto'>
+      <button class="weui-btn" type="primary" bindtap='sumbit'>提交</button>
     </view>
   </view>
 </view>
