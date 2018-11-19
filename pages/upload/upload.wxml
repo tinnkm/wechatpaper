@@ -1,2 +1,42 @@
-<!--pages/upload/upload.wxml-->
-<text>pages/upload/upload.wxml</text>
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">Article</view>
+    <view class="page__desc">文章</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-article">
+      <block wx:for="{{questions}}" wx:key="{{question.questionId}}" wx:for-item="question">
+        <view class="weui-article__section">
+          <!-- <view class="weui-article__h3">1.1 节标题</view> -->
+          <view class="weui-article__p">
+            {{question.questionTitle}}
+          </view>
+          <view class="weui-article__p">
+            <view class="page__bd">
+              <view class="weui-cells">
+                <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                      <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files" id="uploaderFiles">
+                          <block wx:for="{{files[question.questionId]}}" wx:key="*this">
+                            <view class="weui-uploader__file" data-questionid="{{question.questionId}}" bindtap="previewImage" id="{{item}}">
+                              <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                            </view>
+                          </block>
+                        </view>
+                        <view class="weui-uploader__input-box">
+                          <view class="weui-uploader__input" data-questionid="{{question.questionId}}" bindtap="chooseImage"></view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

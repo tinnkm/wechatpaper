@@ -28,18 +28,26 @@ Page({
         title: '加载中',
       })
       wx.request({
-        url: '',
+        url: 'http://whyidg.natappfree.cc/api/user/save',
         method: 'POST', //仅为示例，并非真实的接口地址
         data: {
-          name: e.detail.value.name,
-          telphone: e.detail.value.telphone,
-          idCard: e.detail.value.idCard
+          userName: e.detail.value.name,
+          phone: e.detail.value.telphone,
+          idCard: e.detail.value.idCard,
+          role:'student'
+        },
+        header:{
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
         },
         success(res) {
           console.log(res.data)
           wx.setStorage({
             key: "token",
-            data: data.data
+            data: res.data.token
+          })
+          wx.setStorage({
+            key: "userId",
+            data: res.data.userId
           })
           wx.navigateTo({
             url: '../upload/upload'
